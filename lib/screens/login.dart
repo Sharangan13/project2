@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+
 import 'package:project2/screens/register.dart';
 
 import '../reusable_widgets/reusable_widgets.dart';
+import 'home.dart';
 
 class login_screen extends StatefulWidget {
   const login_screen({Key? key}) : super(key: key);
@@ -55,7 +57,18 @@ class _login_screenState extends State<login_screen> {
                 SizedBox(
                   height: 20,
                 ),
-                firebaseUIButton(context, "Login", () {}),
+                firebaseUIButton(context, "Login", () {
+                  FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
+                          email: _emailTextController.text,
+                          password: _passwordTextController.text)
+                      .then((value) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => home()));
+                  }).onError((error, stackTrace) {
+                    print("Error ${error.toString()}");
+                  });
+                }),
                 registerOption(),
               ],
             ),

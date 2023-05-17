@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../reusable_widgets/reusable_widgets.dart';
 import 'package:project2/screens/login.dart';
+
+import 'home.dart';
 
 class register extends StatefulWidget {
   const register({Key? key}) : super(key: key);
@@ -63,7 +66,24 @@ class _registerState extends State<register> {
                 const SizedBox(
                   height: 20,
                 ),
-                firebaseUIButton(context, "Register", () {}),
+                reusableTextField("Conform Password", Icons.password, true,
+                    _passwordTextController),
+                const SizedBox(
+                  height: 20,
+                ),
+                firebaseUIButton(context, "Register", () {
+                  FirebaseAuth.instance
+                      .createUserWithEmailAndPassword(
+                          email: _emailTextController.text,
+                          password: _passwordTextController.text)
+                      .then((value) {
+                    print("Ctrate new account");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => home()));
+                  }).onError((error, stackTrace) {
+                    print("Error ${error.toString()}");
+                  });
+                }),
                 loginOption(),
               ],
             ),
