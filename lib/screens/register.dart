@@ -58,7 +58,7 @@ class _registerState extends State<register> {
                 const SizedBox(
                   height: 20,
                 ),
-                reusableTextField("Enter Password", Icons.lock_outlined, true,
+                reusableTextField("Enter Password", Icons.password, true,
                     _passwordTextController),
                 const SizedBox(
                   height: 20,

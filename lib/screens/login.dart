@@ -50,8 +50,8 @@ class _login_screenState extends State<login_screen> {
                 SizedBox(
                   height: 30,
                 ),
-                reusableTextField("Enter your password", Icons.password_rounded,
-                    true, _passwordTextController),
+                reusableTextField("Enter your password", Icons.password, true,
+                    _passwordTextController),
                 SizedBox(
                   height: 20,
                 ),
